@@ -5,11 +5,11 @@
    ![](https://img.shields.io/badge/React-17.0.1-87CEEB?style=flat-circle&logo=react&logoColor=309698)
    ![](https://img.shields.io/badge/NodeJS-16.0.0-009900?style=flat-circle&logo=node.js)
    ![](https://img.shields.io/npm/v/npm.svg?logo=npm)
-   ![](https://img.shields.io/github/license/shsarv/TravelYaari-react?style=flat-circle)
-   ![](https://img.shields.io/github/repo-size/shsarv/TravelYaari-react)
-   ![](https://img.shields.io/tokei/lines/github/shsarv/TravelYaari-react?color=orange&logoColor=blue&style=flat-circle)
+   ![](https://img.shields.io/github/license/ritik2727/Travel-Companion-frontend?style=flat-circle)
+   ![](https://img.shields.io/github/repo-size/ritik2727/Travel-Companion-frontend)
+   ![](https://img.shields.io/tokei/lines/github/ritik2727/Travel-Companion-frontend?color=orange&logoColor=blue&style=flat-circle)
 
-<!-- This Project is live at --------> **[https://travelyaari.herokuapp.com](https://travelyaari.herokuapp.com)** -->
+This Project is live at --------> **[https://travel-companion-tau.vercel.app](https://travel-companion-tau.vercel.app)**
 
 
 <hr />
@@ -83,10 +83,10 @@ The main objective of the project is to create a website using MERN STACK techno
 ### How to run the project 🚀:
 
   1. Open the `Terminal`.
-  2. Clone the repository by entering `$ git clone https://github.com/shsarv/TravelYaari-react.git `.
+  2. Clone the repository by entering `$ git clone https://github.com/ritik2727/Travel-Companion-frontend `.
   3. Ensure that `NodeJS` and `npm` are installed on the system.
-  4. change the diectory to repository name using  `$ cd https://github.com/shsarv/TravelYaari-react`.
-  4. Create a `.env` file and write `REACT_APP_API_URL='your backend api url'`. look for backend of the project [here](https://github.com/shsarv/TravelYaari-api).
+  4. change the diectory to repository name using  `$ cd https://github.com/ritik2727/Travel-Companion-frontend`.
+  4. Create a `.env` file and write `REACT_APP_API_URL='your backend api url'`. look for backend of the project [here](https://github.com/ritik2727/Travel-Companion-backend).
   5. install the dependencies by executing the follwing command: `$ npm install`.
   6. To run the React project. execute `$npm start`. and it will point to the `localhost` server with the port `3000`.
   8. Enter the `IP Address: http://localhost:3000` on a web browser and use the application. make sure that your backend api is running.
