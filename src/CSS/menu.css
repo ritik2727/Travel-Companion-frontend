@@ -10,8 +10,8 @@
 }
 
 #my-nav .navbar-brand,
-.navbar-brand:hover{
-    color: white !important;
+.navbar-brand{
+    color: rgb(0, 171, 85) !important;
     font-size: 32px !important;
     font-weight: 400;
     padding: 0 15px;

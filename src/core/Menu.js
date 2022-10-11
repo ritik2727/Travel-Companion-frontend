@@ -6,6 +6,8 @@ import { signout, isAuthenticated } from "../auth";
 import { itemTotal } from "./cartHelpers";
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+
 
 const isActive = (history, path) => {
     if (history.location.pathname === path) {
