@@ -9,10 +9,34 @@ import Corosal from "./Corosal";
 import HomeIcon from "./HomeIcon";
 import Gallery from "./GalleryimgHome";
 import Colors from "./Colors";
+import { Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+import { Typography, Grid, Button } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles((theme) => ({
+  rowContainer: {
+    paddingLeft: "2em",
+    paddingRight: "2em",
+    paddingTop: "1em",
+    paddingBottom: "10em",
+    [theme.breakpoints.down("sm")]: {
+      paddingLeft: "1em",
+      paddingRight: "1em",
+      paddingTop: "1em",
+    },
+    [theme.breakpoints.down("xs")]: {
+      paddingLeft: "0.5em",
+      paddingRight: "0.5em",
+      paddingTop: "0.5em",
+    },
+  },
+}));
 
 const Home = () => {
   const [productsBySell, setProductsBySell] = useState([]);
   const [productsByArrival, setProductsByArrival] = useState([]);
+  const classes = useStyles();
   /* eslint-disable no-unused-vars */
   const [error, setError] = useState(false);
 
@@ -47,38 +71,96 @@ const Home = () => {
       <Corosal />
       <Search />
       <HomeIcon />
+
       <div className="pt-3">
-        <h2
+        {/* <h2
           className="text-center h2 mt-3 mb-3"
           id="home-popularplace"
           style={{ color: Colors.white }}
         >
           <span style={{ color: Colors.orange }}>Popular </span>Places
         </h2>
-        <div className="row">
+
+        <Row>
           {productsBySell.map((product, i) => (
-            <div key={i} className="col-lg-3 col-md-4 col-sm-6 col-xs-6  mb-3">
+            <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12 offset-xs-2 mb-3">
               <Card product={product} />
             </div>
           ))}
-        </div>
-        <h2
+        </Row> */}
+        <Grid
+          container
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+          className={classes.rowContainer}
+        >
+          <Grid item style={{ marginBottom: "5em", marginTop: "2em" }}>
+            <Typography variant="h4" align="center">
+            <span style={{ color: Colors.orange }}>Popular </span>Places
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            container
+            direction="row"
+            alignItems="center"
+            justifyContent="center"
+            spacing={4}
+          >
+            {productsBySell.map((product, i) => (
+              <Grid item key={i}>
+                <Card product={product} />
+              </Grid>
+            ))}
+          </Grid>
+        </Grid>
+
+        {/* <h2
           className="text-center h2 mt-3 mb-3"
           style={{ color: Colors.white }}
         >
           <span style={{ color: Colors.orange }}>New </span>Places
         </h2>
+       
+
+       
         <div className="row">
           {productsByArrival.map((product, i) => (
-            <div
-              key={i}
-              className="col-lg-3 col-md-3 col-sm-6 col-xs-12 offset-xs-2 mb-3"
-            >
+            <Col key={i} sm={10} md={6} lg={5} xl={4}>
               <Card product={product} />
-            </div>
+            </Col>
           ))}
-        </div>
+        </div> */}
+        <Grid
+          container
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+          className={classes.rowContainer}
+        >
+          <Grid item style={{ marginBottom: "5em", marginTop: "2em" }}>
+            <Typography variant="h4" align="center">
+              <span style={{ color: Colors.orange }}>New </span>Places
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            container
+            direction="row"
+            alignItems="center"
+            justifyContent="center"
+            spacing={4}
+          >
+            {productsByArrival.map((product, i) => (
+              <Grid item key={i}>
+                <Card product={product} />
+              </Grid>
+            ))}
+          </Grid>
+        </Grid>
       </div>
+
       <h2
         className="mb-3 p-3 text-center text-success font-weight-bold h2"
         id="homegallery"

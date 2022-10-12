@@ -12,8 +12,8 @@ const ShowImage = ({ item, url }) =>{
         <img
             src={`${API}/${url}/photo/${item._id}`}
             alt={item.name}
-            className="mb-3 img-thumbnail w-100 m-1"
-            style={{ maxHeight: "100%", maxWidth: "100%" }}
+            className="mb-3 img-thumbnail  m-1"
+            style={{height:280,width:300 }}
             onClick={()=> setOpen(true)}
         />
     </div>
