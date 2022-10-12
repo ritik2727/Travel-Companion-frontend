@@ -75,6 +75,7 @@ export default function NewFooter() {
   // Footer Section
   const Devstyle = styled.div`
     padding: 4% 12% 2% 11%;
+   
 
     background-color: rgb(34 43 69);
     border-bottom: #f037a5;
@@ -147,9 +148,9 @@ export default function NewFooter() {
     font-weight: 500;
   `;
   return (
-    <Container fluid style={{ padding: "0", paddingTop: "5rem" }}>
-      <Devstyle>
-        <section>
+    <Container fluid style={{ padding: "0", paddingTop: "5rem",overflow:"auto" }}>
+      <Devstyle >
+        <section style={{padding:'1rem'}}>
           <Row>
             <Col sm={6} md={3}>
               <Heading>Lukjury Travel</Heading>
@@ -282,7 +283,7 @@ export default function NewFooter() {
            
           </Row>
         </section>
-        <section style={{ paddingTop: "4rem" }}>
+        <section style={{ paddingTop: "4rem",padding:'1rem' }}>
           <Row>
             {/* <Col sm={6} md={3}>
               <Heading>CUSTOMER SERVICE</Heading>
