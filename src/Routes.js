@@ -54,7 +54,7 @@ const Routes = (props) => {
             />
             {/* <Header /> */}
             <ScrollToTop />
-
+      
             <Switch>
               <Route path="/" exact component={Home} />
               <Route path="/shop" exact component={Shop} />
@@ -100,6 +100,7 @@ const Routes = (props) => {
                 component={UpdateCategory}
               />
             </Switch>
+          
             <NewFooter/>
           </div>
         </BrowserRouter>

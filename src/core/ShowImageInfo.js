@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { API } from "../config";
 import ModalVideo from 'react-modal-video';
 import './../../node_modules/react-modal-video/scss/modal-video.scss';
-const ShowImage = ({ item, url }) =>{ 
+const ShowImageInfo = ({ item, url }) =>{ 
     const [isOpen, setOpen] = useState(false);
     return(
     <div className="product-img">
@@ -12,8 +12,8 @@ const ShowImage = ({ item, url }) =>{
         <img
             src={`${API}/${url}/photo/${item._id}`}
             alt={item.name}
-            className="mb-3 img-thumbnail  m-1"
-            style={{height:280,width:300 }}
+            className="mb-3 img-thumbnail w-100 m-1"
+            style={{ maxHeight: "100%", maxWidth: "100%" }}
             onClick={()=> setOpen(true)}
         />
     </div>
@@ -21,6 +21,4 @@ const ShowImage = ({ item, url }) =>{
 )
 };
 
-export default ShowImage;
-
-
+export default ShowImageInfo;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Colors from "./Colors";
 
 const RadioBox = ({ prices, handleFilters }) => {
     // eslint-disable-next-line
@@ -11,7 +12,7 @@ const RadioBox = ({ prices, handleFilters }) => {
 
     return prices.map((p, i) => (
         <div key={i}>
-        <label className="form-check-label text-info font-weight-bold">
+        <label className="form-check-label text-info font-weight-bold" >
             <input
                 onChange={handleChange}
                 value={`${p._id}`}

@@ -161,7 +161,7 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
     const showSuccess = success => (
         <div className="alert alert-info" style={{ display: success ? '' : 'none' }}>
             Thanks! Your payment was successful!
-        </div>
+        </div> 
     );
 
     const showLoading = loading => loading && <h2 className="text-danger">Loading...</h2>;
