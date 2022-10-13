@@ -1,193 +1,249 @@
-import React, { useState, useEffect } from 'react';
-import Layout from '../core/Layout';
-import { isAuthenticated } from '../auth';
+import React, { useState, useEffect } from "react";
+import Layout from "../core/Layout";
+import { isAuthenticated } from "../auth";
 /* eslint-disable no-unused-vars */
-import { Link } from 'react-router-dom';
-import { createProduct, getCategories } from './apiAdmin';
+import { Link } from "react-router-dom";
+import { createProduct, getCategories } from "./apiAdmin";
+import Colors from "../core/Colors";
 
 const AddProduct = () => {
-    const [values, setValues] = useState({
-        name: '',
-        subname:'',
-        youtubelink:'',
-        description: '',
-        price: '',
-        categories: [],
-        category: '',
-        shipping: '',
-        quantity: '',
-        photo: '',
-        loading: false,
-        error: '',
-        createdProduct: '',
-        redirectToProfile: false,
-        formData: ''
+  const [values, setValues] = useState({
+    name: "",
+    subname: "",
+    youtubelink: "",
+    description: "",
+    price: "",
+    categories: [],
+    category: "",
+    shipping: "",
+    quantity: "",
+    photo: "",
+    loading: false,
+    error: "",
+    createdProduct: "",
+    redirectToProfile: false,
+    formData: "",
+  });
+
+  const { user, token } = isAuthenticated();
+  const {
+    name,
+    subname,
+    youtubelink,
+    description,
+    price,
+    categories,
+    category,
+    shipping,
+    quantity,
+    loading,
+    error,
+    createdProduct,
+    redirectToProfile,
+    formData,
+  } = values;
+
+  // load categories and set form data
+  const init = () => {
+    getCategories().then((data) => {
+      if (data.error) {
+        setValues({ ...values, error: data.error });
+      } else {
+        setValues({
+          ...values,
+          categories: data,
+          formData: new FormData(),
+        });
+      }
     });
+  };
 
-    const { user, token } = isAuthenticated();
-    const {
-        name,
-        subname,
-        youtubelink,
-        description,
-        price,
-        categories,
-        category,
-        shipping,
-        quantity,
-        loading,
-        error,
-        createdProduct,
-        redirectToProfile,
-        formData
-    } = values;
+  useEffect(() => {
+    init();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    // load categories and set form data
-    const init = () => {
-        getCategories().then(data => {
-            if (data.error) {
-                setValues({ ...values, error: data.error });
-            } else {
-                setValues({
-                    ...values,
-                    categories: data,
-                    formData: new FormData()
-                });
-            }
+  const handleChange = (name) => (event) => {
+    const value = name === "photo" ? event.target.files[0] : event.target.value;
+    formData.set(name, value);
+    setValues({ ...values, [name]: value });
+  };
+
+  const clickSubmit = (event) => {
+    event.preventDefault();
+    setValues({ ...values, error: "", loading: true });
+
+    createProduct(user._id, token, formData).then((data) => {
+      if (data.error) {
+        setValues({ ...values, error: data.error });
+      } else {
+        setValues({
+          ...values,
+          name: "",
+          subname: "",
+          youtubelink: "",
+          description: "",
+          photo: "",
+          price: "",
+          quantity: "",
+          loading: false,
+          createdProduct: data.name,
         });
-    };
+      }
+    });
+  };
 
-    useEffect(() => {
-        init();
-         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+  const newPostForm = () => (
+    <div
+      className="card my-2 p-3"
+      style={{
+        backgroundColor: "rgb(34 43 69)",
+        borderBottom: "#F037A5",
+        backgroundImage:
+          "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
+        boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
+        borderRadius: 15,
+        overflow: "hidden",
+      }}
+    >
+      <form className="mb-3" onSubmit={clickSubmit}>
+        <h4 style={{color:Colors.orange}}>Post Place</h4>
+        <div className="form-group">
+          <label className="btn " style={{backgroundColor:Colors.realorange}}>
+            <input
+              onChange={handleChange("photo")}
+              type="file"
+              name="photo"
+              accept="image/*"
+            />
+          </label>
+        </div>
 
-    const handleChange = name => event => {
-        const value = name === 'photo' ? event.target.files[0] : event.target.value;
-        formData.set(name, value);
-        setValues({ ...values, [name]: value });
-    };
+        <div className="form-group">
+          <label className="text" style={{color:Colors.white}}>Place Name</label>
+          <input
+            onChange={handleChange("name")}
+            type="text"
+            className="form-control"
+            value={name}
+          />
+        </div>
+        <div className="form-group">
+          <label className="text" style={{color:Colors.white}}>Place sub Name</label>
+          <input
+            onChange={handleChange("subname")}
+            type="text"
+            className="form-control"
+            value={subname}
+          />
+        </div>
+        <div className="form-group">
+          <label className="text" style={{color:Colors.white}}>youtube link (Id only)</label>
+          <input
+            onChange={handleChange("youtubelink")}
+            type="text"
+            className="form-control"
+            value={youtubelink}
+            placeholder=" not this -https://youtu.be/a4pi2zKbf8Q but this only- a4pi2zKbf8Q"
+          />
+        </div>
 
-    const clickSubmit = event => {
-        event.preventDefault();
-        setValues({ ...values, error: '', loading: true });
+        <div className="form-group">
+          <label className="text" style={{color:Colors.white}}>Description</label>
+          <textarea
+            onChange={handleChange("description")}
+            className="form-control"
+            value={description}
+          />
+        </div>
 
-        createProduct(user._id, token, formData).then(data => {
-            if (data.error) {
-                setValues({ ...values, error: data.error });
-            } else {
-                setValues({
-                    ...values,
-                    name: '',
-                    subname:'',
-                    youtubelink:'',
-                    description: '',
-                    photo: '',
-                    price: '',
-                    quantity: '',
-                    loading: false,
-                    createdProduct: data.name
-                });
-            }
-        });
-    };
+        <div className="form-group">
+          <label className="text" style={{color:Colors.white}}>Price</label>
+          <input
+            onChange={handleChange("price")}
+            type="number"
+            className="form-control"
+            value={price}
+          />
+        </div>
 
-    const newPostForm = () => (
-        <div className="card my-2 p-3">
-        <form className="mb-3" onSubmit={clickSubmit}>
-            <h4>Post Place</h4>
-            <div className="form-group">
-                <label className="btn btn-secondary">
-                    <input onChange={handleChange('photo')} type="file" name="photo" accept="image/*" />
-                </label>
-            </div>
+        <div className="form-group">
+          <label className="text" style={{color:Colors.white}}>Category</label>
+          <select onChange={handleChange("category")} className="form-control">
+            <option>Please select</option>
+            {categories &&
+              categories.map((c, i) => (
+                <option key={i} value={c._id}>
+                  {c.name}
+                </option>
+              ))}
+          </select>
+        </div>
 
-            <div className="form-group">
-                <label className="text-muted">Place Name</label>
-                <input onChange={handleChange('name')} type="text" className="form-control" value={name} />
-            </div>
-            <div className="form-group">
-                <label className="text-muted">Place sub Name</label>
-                <input onChange={handleChange('subname')} type="text" className="form-control" value={subname} />
-            </div>
-            <div className="form-group">
-                <label className="text-muted">youtube link (Id only)</label>
-                <input onChange={handleChange('youtubelink')} type="text" className="form-control" value={youtubelink} placeholder=" not this -https://youtu.be/a4pi2zKbf8Q but this only- a4pi2zKbf8Q" />
-            </div>
+        <div className="form-group">
+          <label className="text" style={{color:Colors.white}}>In Season ?</label>
+          <select onChange={handleChange("shipping")} className="form-control">
+            <option>Please select</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+          </select>
+        </div>
 
-            <div className="form-group">
-                <label className="text-muted">Description</label>
-                <textarea onChange={handleChange('description')} className="form-control" value={description} />
-            </div>
+        <div className="form-group">
+          <label className="text" style={{color:Colors.white}}>No of guides present</label>
+          <input
+            onChange={handleChange("quantity")}
+            type="number"
+            className="form-control"
+            value={quantity}
+          />
+        </div>
 
-            <div className="form-group">
-                <label className="text-muted">Price</label>
-                <input onChange={handleChange('price')} type="number" className="form-control" value={price} />
-            </div>
-
-            <div className="form-group">
-                <label className="text-muted">Category</label>
-                <select onChange={handleChange('category')} className="form-control">
-                    <option>Please select</option>
-                    {categories &&
-                        categories.map((c, i) => (
-                            <option key={i} value={c._id}>
-                                {c.name}
-                            </option>
-                        ))}
-                </select>
-            </div>
-
-            <div className="form-group">
-                <label className="text-muted">In Season ?</label>
-                <select onChange={handleChange('shipping')} className="form-control">
-                    <option>Please select</option>
-                    <option value="0">No</option>
-                    <option value="1">Yes</option>
-                </select>
-            </div>
-
-            <div className="form-group">
-                <label className="text-muted">No of guides present</label>
-                <input onChange={handleChange('quantity')} type="number" className="form-control" value={quantity} />
-            </div>
-
-            <button className="btn btn-outline-primary">Create PLace</button>
-        </form>
+        <button className="btn btn-outline" style={{color:Colors.white,backgroundColor:Colors.orange}}>Create PLace</button>
+      </form>
     </div>
+  );
+
+  const showError = () => (
+    <div
+      className="alert alert-danger my-2 p-2"
+      style={{ display: error ? "" : "none" }}
+    >
+      {error}
+    </div>
+  );
+
+  const showSuccess = () => (
+    <div
+      className="alert alert-info my-2 p-2"
+      style={{ display: createdProduct ? "" : "none" }}
+    >
+      <h2>{`${createdProduct}`} is created!</h2>
+    </div>
+  );
+
+  const showLoading = () =>
+    loading && (
+      <div className="alert alert-success my-2 p-2">
+        <h2>Loading...</h2>
+      </div>
     );
 
-    const showError = () => (
-        <div className="alert alert-danger my-2 p-2" style={{ display: error ? '' : 'none' }}>
-            {error}
+  return (
+    <Layout
+      title="Add a new product"
+      description={`G'day ${user.name}, ready to add a new product?`}
+    >
+      <div className="row">
+        <div className="col-md-8 offset-md-2">
+          {showLoading()}
+          {showSuccess()}
+          {showError()}
+          {newPostForm()}
         </div>
-    );
-
-    const showSuccess = () => (
-        <div className="alert alert-info my-2 p-2" style={{ display: createdProduct ? '' : 'none' }}>
-            <h2>{`${createdProduct}`} is created!</h2>
-        </div>
-    );
-
-    const showLoading = () =>
-        loading && (
-            <div className="alert alert-success my-2 p-2">
-                <h2>Loading...</h2>
-            </div>
-        );
-
-    return (
-        <Layout title="Add a new product" description={`G'day ${user.name}, ready to add a new product?`}>
-            <div className="row">
-                <div className="col-md-8 offset-md-2">
-                    {showLoading()}
-                    {showSuccess()}
-                    {showError()}
-                    {newPostForm()}
-                </div>
-            </div>
-        </Layout>
-    );
+      </div>
+    </Layout>
+  );
 };
 
 export default AddProduct;

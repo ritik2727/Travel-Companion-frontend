@@ -16,6 +16,8 @@ import {
   ListItemButton,
   ListItemIcon,
 } from "@mui/material";
+import NotificationBadge from "react-notification-badge";
+import { Effect } from "react-notification-badge";
 import {
   Toolbar,
   useScrollTrigger,
@@ -263,35 +265,10 @@ function NewHeader(props) {
   const [anchorE3, setAnchorE3] = useState(null);
   const [openMenu3, setOpenMenu3] = useState(false);
 
-  //   const userLogin = useSelector((state) => state.userLogin);
-  //   const { userInfo } = userLogin;
-
-  //   const logoutHandler = () => {
-  //     dispatch(logout());
-  //   };
-
-  //   const getWishlistsItem = useSelector((state) => state.getWishlistsItem);
-  //   const { loading, error, wishItem } = getWishlistsItem;
-
-  //   const cart = useSelector((state) => state.cart);
-  //   const { cartItems } = cart;
-
-  // const {cart,wish} =useContext(StateContext);
-  // const [dataCart] =  cart;
-  // const [dataWishlist] = wish;
-
-  //   const handelSubmit = (e) => {
-  //     e.preventDefault();
-  //     navigate(`/search?name=${search}`);
-  //     setSearch("");
-  //   };
   const handleChange = (e, newValue) => {
     props.setValue(newValue);
   };
 
-  // const handleChange = (e,newValue)=>{
-  //     props.setValue(newValue);
-  // }
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget);
     setOpenMenu(true);
@@ -394,19 +371,8 @@ function NewHeader(props) {
     },
     { name: "Gallery", link: "/Gallery", activeIndex: 2 },
   ];
-  const routesH = [
-    { name: "CARS", link: "/men", activeIndex: 0 },
-    // {name:'Women',link:'/women',activeIndex:1,},
-    // {name:'Mobile Cover',link:'/cover',activeIndex:2},
-    // {name:'HOME',link:'/',activeIndex:9},
-  ];
+  const routesH = [{ name: "CARS", link: "/men", activeIndex: 0 }];
 
-  // const routesV = [
-  //   { name: "My Account", link: "/myaccount", activeIndex: 4 },
-  //   { name: "My Order", link: "/myorders", activeIndex: 5 },
-  //   { name: "My Wishlist", link: "/whistlist", activeIndex: 7 },
-  //   { name: "Cart", link: "/cart", activeIndex: 8 },
-  // ];
   useEffect(() => {
     [...adminOptions, ...routes, ...routesAuth].forEach((route) => {
       switch (window.location.pathname) {
@@ -424,15 +390,18 @@ function NewHeader(props) {
         case "/":
           props.setValue(0);
           break;
-        case "/login":
+        case "/signin":
           props.setValue(3);
           break;
         case "/cart":
           props.setValue(4);
           break;
-        case "/wishlist":
-          props.setValue(5);
+        case "/user/dashboard":
+          props.setValue(8);
           break;
+          case "/admin/dashboard":
+            props.setValue(9);
+            break;
         default:
           break;
       }
@@ -452,15 +421,13 @@ function NewHeader(props) {
             <a
               key={`${route}${index}`}
               href={route.href}
-              style={{
-                color: "rgb(34 43 69)",
-              }}
+              style={{color: Colors.white, textDecoration: "none" }}
             >
               <Tab
                 key={`${route}${index}`}
                 className={classes.tab}
                 // style={{color:'black'}}
-                style={{ color: Colors.white, textDecoration: "none" }}
+                style={{ color: Colors.white,opacity:1, textDecoration: "none" }}
                 label={route.name}
               />
             </a>
@@ -495,6 +462,7 @@ function NewHeader(props) {
               label="Dashboard"
             />
           )}
+
           {isAuthenticated() && isAuthenticated().user.role === 1 && (
             <Tab
               className={classes.tab}
@@ -502,7 +470,7 @@ function NewHeader(props) {
               to="/admin/dashboard"
               // style={{color:'black'}}
               label="Dashboard"
-              style={{ color: Colors.white }}
+              style={{ color: Colors.white, textDecoration: "none" }}
             />
           )}
         </Tabs>
@@ -544,39 +512,32 @@ function NewHeader(props) {
           </Typography>
         </Button>
       )}
-      {/* <Button component={Link} to="/wishlist" onClick={() => props.setValue(5)}>
-        <Favorite
-          //   style={{ color: wishItem.length ? "#FF0000" : Colors.white }}
-          style={{ color: Colors.white }}
-        />
-      </Button> */}
+
       <Button
-        // style={{ marginRight:'5%' }}
+        style={{ padding: "1%" }}
         component={Link}
         to="/cart"
         onClick={() => props.setValue(4)}
       >
-        {/* <Badge badgeContent={cartItems.length} color="error"> */}
-        <Badge badgeContent={itemTotal()} color="error">
+        <Badge
+          badgeContent={itemTotal()}
+          style={{ overflow: "visible", zIndex: 1 }}
+          color="error"
+        >
           <LocalMall style={{ color: Colors.white }} />
         </Badge>
       </Button>
-      {/* {userInfo && userInfo.isAdmin && ( */}
 
-      {isAuthenticated() && (
-        <Button
-          //   style={{ marginRight: "5%" }}
-          aria-owns={anchorE3 ? "simple-menu3" : undefined}
-          aria-haspopup={anchorE3 ? "true" : undefined}
-          onMouseOver={(event) => handleClick3(event)}
-          onClick={() => props.setValue(7)}
-        >
-          <DashboardIcon style={{ color: Colors.orange }} />
-        </Button>
-      )}
-      {/* )} */}
+      <Button
+        //   style={{ marginRight: "5%" }}
+        aria-owns={anchorE3 ? "simple-menu3" : undefined}
+        aria-haspopup={anchorE3 ? "true" : undefined}
+        onMouseOver={(event) => handleClick3(event)}
+        onClick={() => props.setValue(7)}
+      >
+        <DashboardIcon style={{ color: Colors.orange }} />
+      </Button>
 
-      {/* this for admin  */}
       <Menu
         id="simple-menu3"
         anchorEl={anchorE3}
@@ -638,20 +599,7 @@ function NewHeader(props) {
           hey,{isAuthenticated() && isAuthenticated().user.name}
           {/* {userInfo && userInfo.name} */}
         </MenuItem>
-        {/* <MenuItem
-          // key={`${option}${i}`}
-          component={Link}
-          to="/profile"
-          classes={{ root: classes.menuItem }}
-          onClick={(event) => {
-            handleMenuItemClick2(event, 1);
-            props.setValue(6);
-            handleClose2();
-          }}
-          selected={1 === props.selectedIndex && props.value === 6}
-        >
-          Profile
-        </MenuItem> */}
+   
         <MenuItem
           // key={`${option}${i}`}
           // component={Link}
@@ -693,8 +641,7 @@ function NewHeader(props) {
         <div style={{ marginLeft: "5%" }}>{/* <SearchBox /> */}</div>
 
         <List disablePadding>
-          {isAuthenticated() && isAuthenticated() ? //        variant="h4" //    <Typography //    <ListItem style={{ backgroundColor: "#d9dadb" }}> //  <ListItemText>
-          //       style={{
+          {isAuthenticated() && isAuthenticated() ? //       style={{ //        variant="h4" //    <Typography //    <ListItem style={{ backgroundColor: "#d9dadb" }}> //  <ListItemText>
           //         fontSize: "1.5rem",
           //        fontFamily:'cursive',
           //         fontStyle: "italic",
@@ -808,7 +755,7 @@ function NewHeader(props) {
                 classes={{ selected: classes.drawerItemSelected }}
                 onClick={() => {
                   setOpenDrawer(false);
-                  props.setValue(2);
+                  props.setValue(1);
                 }}
               >
                 <ListItemText disableTypography className={classes.drawerItem}>
@@ -880,7 +827,7 @@ function NewHeader(props) {
                 classes={{ selected: classes.drawerItemSelected }}
                 onClick={() => {
                   setOpenDrawer(false);
-                  props.setValue(6);
+                  props.setValue(8);
                 }}
               >
                 <ListItemText disableTypography className={classes.drawerItem}>
@@ -899,7 +846,7 @@ function NewHeader(props) {
                 classes={{ selected: classes.drawerItemSelected }}
                 onClick={() => {
                   setOpenDrawer(false);
-                  props.setValue(6);
+                  props.setValue(9);
                 }}
               >
                 <ListItemText disableTypography className={classes.drawerItem}>
@@ -980,10 +927,10 @@ function NewHeader(props) {
                   signout(() => {
                     history.push("/");
                     setOpenDrawer(false);
-                    props.setValue(9);
+                    props.setValue(6);
                   })
                 }
-                selected={props.value === 9}
+                selected={props.value === 6}
               >
                 <ListItemText className={classes.drawerItem} disableTypography>
                   Logout

@@ -131,6 +131,12 @@
     animation: Gradient 15s ease infinite;
 } */
 /*----------- home ------------*/
+
+/* .badge-notify{
+    background:red;
+    position:relative;
+    transform: (-150%, -100%)
+ } */
 .home-h2-main{
     color: turquoise;
     box-shadow: 2px 5px #4f6c75;

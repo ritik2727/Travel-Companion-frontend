@@ -94,13 +94,14 @@ const CardInfo = ({
     return (
       cartUpdate && (
         <div>
-          <div className="input-group mb-3">
-            <div className="input-group-prepend">
+          <div className="input-group mb-3"   style={{overflow:'visible'}}>
+            {/* <div className="input-group-prepend">
               <span className="input-group-text">Adjust Quantity</span>
-            </div>
-            <input
+            </div> */}
+            <input 
               type="number"
               className="form-control"
+              style={{overflow:'visible'}}
               value={count}
               onChange={handleChange(product._id)}
             />

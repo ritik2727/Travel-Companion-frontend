@@ -90,6 +90,7 @@ const Home = () => {
         </Row> */}
         <Grid
           container
+          id="home-popularplace"
           direction="column"
           alignItems="center"
           justifyContent="center"
