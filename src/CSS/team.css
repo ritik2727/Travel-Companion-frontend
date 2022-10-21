@@ -19,14 +19,15 @@
 }
 .profile-card-2 h5{
     font-weight:600;
-    color:#6ab04c;
+    color:rgb(0, 171, 85);
 }
 .profile-card-2 .card-text{
     font-weight:300;
     font-size:15px;
+    /* color:rgb(0, 171, 85); */
 }
 #logoofcard a{
-    color: rgb(59, 163, 59);
+    color: rgb(0, 171, 85);
 }
 
 .fa-github:hover{
