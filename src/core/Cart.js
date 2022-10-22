@@ -39,7 +39,10 @@ const Cart = () => {
   const showItems = (items) => {
     return (
       <div>
-        <h3 className="h3 my-2 p-2 text-center  border-info rounded border" style={{color:Colors.blue}}>
+        <h3
+          className="h3 my-2 p-2 text-center  border-info rounded border"
+          style={{ color: Colors.blue }}
+        >
           You have {`${items.length}`} Dream destination.
         </h3>
         {items.map((product, i) => (
@@ -58,7 +61,17 @@ const Cart = () => {
   };
 
   const noItemsMessage = () => (
-    <h3 className="border border-warning p-3 my-4 h3 rounded shadow text-center">
+    <h3
+      className="border p-3 my-4 h3 rounded shadow text-center"
+      style={{
+        backgroundColor: "rgb(34 43 69)",
+        borderColor: Colors.SubWhite,
+        backgroundImage:
+          "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
+        boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
+        color: Colors.white,
+      }}
+    >
       Your Wishlist is empty. <br />
       <br />{" "}
       <Link to="/shop" className="text-info font-weight-bold h4">

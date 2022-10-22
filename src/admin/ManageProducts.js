@@ -13,7 +13,7 @@ const ManageProducts = () => {
   const loadProducts = () => {
     getProducts().then((data) => {
       if (data.error) {
-        console.log(data.error);
+        console.log(data.error); 
       } else {
         setProducts(data);
       }
@@ -41,7 +41,7 @@ const ManageProducts = () => {
       className="container-fluid"
     >
       <div className="row">
-        <div className="col-12 my-3">
+        <div className="col-12 my-3" >
           <h2 className="text-center" style={{color:Colors.orange}}>Total {products.length} Places</h2>
           <hr />
           <ul

@@ -7,6 +7,7 @@ import { isAuthenticated } from '../auth';
 import { Link } from 'react-router-dom';
 // import "braintree-web"; // not using this package
 import DropIn from 'braintree-web-drop-in-react';
+import Colors from './Colors';
 
 const Checkout = ({ products, setRun = f => f, run = undefined }) => {
     const [data, setData] = useState({
@@ -126,7 +127,7 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
             {data.clientToken !== null && products.length > 0 ? (
                 <div>
                     <div className="gorm-group mb-3">
-                        <label className="text-muted">Delivery address:</label>
+                        <label className="text" style={{color:Colors.SubWhite}}>Delivery address:</label>
                         <textarea
                             onChange={handleAddress}
                             className="form-control"
@@ -136,6 +137,7 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
                     </div>
 
                     <DropIn
+                    
                         options={{
                             authorization: data.clientToken,
                             paypal: {

@@ -147,7 +147,7 @@ const Dashboard = () => {
                 backgroundImage:
                   "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
                 boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
-                borderRadius: 15,
+                // borderRadius: 15,
                 overflow: "hidden",
               }}
           >
@@ -225,9 +225,9 @@ const Dashboard = () => {
                   {h.products.map((p, i) => {
                     return (
                       <div key={i}>
-                        <h6>Product name: {p.name}</h6>
-                        <h6>Product price: ${p.price}</h6>
-                        <h6>Purchased date: {moment(p.createdAt).fromNow()}</h6>
+                        <h6 style={{color:Colors.SubWhite}}>Product name: {p.name}</h6>
+                        <h6 style={{color:Colors.SubWhite}}>Product price: ${p.price}</h6>
+                        <h6 style={{color:Colors.SubWhite}}>Purchased date: {moment(p.createdAt).fromNow()}</h6>
                       </div>
                     );
                   })}

@@ -29,6 +29,7 @@ import ScrollToTop from "./core/ScrollToTop";
 import ScrollTop from "./core/ScrollTop";
 import Colors from "./core/Colors";
 import NewFooter from "./core/NewFooter";
+import ManageCategory from "./admin/ManageCategory";
 
 const Routes = (props) => {
   const [value, setValue] = useState(0);
@@ -88,6 +89,11 @@ const Routes = (props) => {
                 path="/admin/products"
                 exact
                 component={ManageProducts}
+              />
+               <PrivateRoute
+                path="/admin/categories"
+                exact
+                component={ManageCategory}
               />
               <AdminRoute
                 path="/admin/product/update/:productId"

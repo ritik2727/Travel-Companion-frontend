@@ -59,7 +59,7 @@ const Product = (props) => {
     <>
       <Layout>
         <div align={matchesMD?"center" :null} className={matchesMD?"col mt-3  " :"row mt-3"}>
-          <div className="col-8 ">
+          <div className={matchesMD?"col-10 " :"col-8"}>
             {product && product.description && (
               <CardInfo product={product} showViewProductButton={false} />
             )}

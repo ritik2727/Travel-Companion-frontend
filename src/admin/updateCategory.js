@@ -3,6 +3,7 @@ import Layout from '../core/Layout';
 import { isAuthenticated } from '../auth';
 import { Link, Redirect } from 'react-router-dom';
 import { getCategory, updateCategory } from './apiAdmin';
+import Colors from '../core/Colors';
 // {category: ["5cd0258f2793ec6e100bc191"], price: []}
 // http://localhost:3000/admin/category/update/5cd0258f2793ec6e100bc191
 const UpdateCategory = ({ match }) => {
@@ -60,32 +61,71 @@ const UpdateCategory = ({ match }) => {
             }
         });
     };
-
     const updateCategoryForm = () => (
-        <div className="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
-            <form className="mb-5" onSubmit={submitCategoryForm}>
-                <span className="login100-form-title p-b-32 m-b-7">Update Category Form</span>
-                <span className="txt1 p-b-11">Category Name</span>
-                <br />
-                <br />
-                <div className="wrap-input100 validate-input m-b-36">
-                    <input
-                        onChange={handleChange('name')}
-                        value={name}
-                        className="input100"
-                        type="text"
-                        required
-                        name="name"
-                    />
-                </div>
-                <div className="w-size25">
-                    <button type="submit" className="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
-                        Save Changes
-                    </button>
-                </div>
-            </form>
+        <div
+          className="card p-3 my-4"
+          style={{
+            backgroundColor: "rgb(34 43 69)",
+            borderBottom: "#F037A5",
+            backgroundImage:
+              "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
+            boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
+            borderRadius: 15,
+            overflow: "hidden",
+            // marginTop:'2rem'
+          }}
+        >
+             <h3 className="text-center" style={{color:Colors.orange}}>Update Category Form</h3>
+          <form onSubmit={submitCategoryForm}>
+            <div className="form-group">
+              <label className="text" style={{ color: Colors.white }}>
+              Category Name
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                onChange={handleChange('name')}
+                value={name}
+                name="name"
+                autoFocus
+                required
+              />
+            </div>
+            <button
+              className="btn "
+              style={{ backgroundColor: Colors.orange, color: Colors.white }}
+            >
+              Save Changes
+            </button>
+          </form>
         </div>
-    );
+      );
+
+    // const updateCategoryForm = () => (
+    //     <div className="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+    //         <form className="mb-5" onSubmit={submitCategoryForm}>
+    //             <span className="login100-form-title p-b-32 m-b-7">Update Category Form</span>
+    //             <span className="txt1 p-b-11">Category Name</span>
+    //             <br />
+    //             <br />
+    //             <div className="wrap-input100 validate-input m-b-36">
+    //                 <input
+    //                     onChange={handleChange('name')}
+    //                     value={name}
+    //                     className="input100"
+    //                     type="text"
+    //                     required
+    //                     name="name"
+    //                 />
+    //             </div>
+    //             <div className="w-size25">
+    //                 <button type="submit" className="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
+    //                     Save Changes
+    //                 </button>
+    //             </div>
+    //         </form>
+    //     </div>
+    // );
 
     const showError = () => (
         <div className={'alert alert-danger my-3'} role="alert" style={{ display: error ? '' : 'none' }}>
@@ -106,8 +146,8 @@ const UpdateCategory = ({ match }) => {
 
     const goBackBTN = () => {
         return (
-            <div className="my-5 p-3 border rounded">
-                <Link to="/admin/categories" className="text-info">
+            <div className="my-5 p-3 ">
+                <Link to="/admin/categories" className="text" style={{color:Colors.realorange}}>
                     Back To Admin Home
                 </Link>
             </div>
@@ -133,3 +173,7 @@ const UpdateCategory = ({ match }) => {
 };
 
 export default UpdateCategory;
+
+
+
+

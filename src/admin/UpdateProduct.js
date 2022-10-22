@@ -4,6 +4,7 @@ import { isAuthenticated } from '../auth';
 /* eslint-disable no-unused-vars */
 import { Link, Redirect } from 'react-router-dom';
 import { getProduct, getCategories, updateProduct } from './apiAdmin';
+import Colors from '../core/Colors';
 
 const UpdateProduct = ({ match }) => {
     const [values, setValues] = useState({
@@ -110,36 +111,48 @@ const UpdateProduct = ({ match }) => {
             }
         });
     };
-
+ 
     const newPostForm = () => (
-        <form className="mb-3" onSubmit={clickSubmit}>
-            <h4>Post Photo</h4>
-            <div className="form-group">
+        <div
+        className="card my-2 p-3"
+        style={{
+          backgroundColor: "rgb(34 43 69)",
+          borderBottom: "#F037A5",
+          backgroundImage:
+            "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
+          boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
+          borderRadius: 15,
+          overflow: "hidden",
+        }}
+      >
+        <form className="mb-3" onSubmit={clickSubmit} >
+            <h4  style={{color:Colors.orange}}>Post Photo</h4>
+            <div className="form-group" >
                 <label className="btn btn-secondary">
                     <input onChange={handleChange('photo')} type="file" name="photo" accept="image/*" />
                 </label>
             </div>
 
             <div className="form-group">
-                <label className="text-muted">Name</label>
+                <label className="text" style={{color:Colors.white}}>Name</label>
                 <input onChange={handleChange('name')} type="text" className="form-control" value={name} />
             </div>
             <div className="form-group">
-                <label className="text-muted">youtube link (Id only)</label>
+                <label className="text" style={{color:Colors.white}}>youtube link (Id only)</label>
                 <input onChange={handleChange('youtubelink')} type="text" className="form-control" value={youtubelink} placeholder=" not this -https://youtu.be/a4pi2zKbf8Q but this only- a4pi2zKbf8Q" />
             </div>
             <div className="form-group">
-                <label className="text-muted">Description</label>
+                <label className="text" style={{color:Colors.white}}>Description</label>
                 <textarea onChange={handleChange('description')} className="form-control" value={description} />
             </div>
 
             <div className="form-group">
-                <label className="text-muted">Price</label>
+                <label className="text" style={{color:Colors.white}}>Price</label>
                 <input onChange={handleChange('price')} type="number" className="form-control" value={price} />
             </div>
 
             <div className="form-group">
-                <label className="text-muted">Category</label>
+                <label className="text" style={{color:Colors.white}}>Category</label>
                 <select onChange={handleChange('category')} className="form-control">
                     <option>Please select</option>
                     {categories &&
@@ -152,7 +165,7 @@ const UpdateProduct = ({ match }) => {
             </div>
 
             <div className="form-group">
-                <label className="text-muted">Shipping</label>
+                <label className="text" style={{color:Colors.white}}>Shipping</label>
                 <select onChange={handleChange('shipping')} className="form-control">
                     <option>Please select</option>
                     <option value="0">No</option>
@@ -161,12 +174,13 @@ const UpdateProduct = ({ match }) => {
             </div>
 
             <div className="form-group">
-                <label className="text-muted">Quantity</label>
+                <label className="text" style={{color:Colors.white}}>Quantity</label>
                 <input onChange={handleChange('quantity')} type="number" className="form-control" value={quantity} />
             </div>
 
-            <button className="btn btn-outline-primary">Update Product</button>
+            <button className="btn " style={{color:Colors.white,backgroundColor:Colors.orange}}>Update Product</button>
         </form>
+        </div>
     );
 
     const showError = () => (

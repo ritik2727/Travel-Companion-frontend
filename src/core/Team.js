@@ -6,7 +6,7 @@ import Sachi from "./../image/team/img3.jpeg";
 import Sarveshbg from "./../image/team/img-top1.jpeg";
 import Satyambg from "./../image/team/img-top2.jpeg";
 import Sachibg from "./../image/team/img-top3.jpeg";
-import { AnimatedDiv } from "../core/animated"
+import { AnimatedDiv } from "../core/animated";
 import { Card, Button } from "react-bootstrap";
 import { IconButton, Typography } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -56,7 +56,24 @@ export default function Team() {
     <Layout>
       <section>
         <div className="container">
-          <div className="row">
+          <Typography
+            variant="h4"
+            align="center"
+            style={{
+              marginBottom: "1em",
+              marginTop: "1.5em",
+              fontSize: "2.7rem",
+              fontFamily: "Pacifico",
+              textTransform: "none",
+              overflow:'visible'
+            }}
+          >
+            Team{" "}
+            <span style={{ color: Colors.orange, fontFamily: "Pacifico" }}>
+              Lukjury{" "}
+            </span>
+          </Typography>
+          <div className="row" >
             {teamdel.map((item, id) => (
               //   <AnimatedDiv
               //   style={{ borderRadius: 15 }}
@@ -66,7 +83,7 @@ export default function Team() {
               //     // boxShadow: "0px 0px 8px #1976D2",
               //   }}
               // >
-             <div className="col-lg-4 col-md-6 col-sm-12 col-xs-12"  > 
+              <div className="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                 <div
                   className="  my-3 p-2"
                   style={{
@@ -82,9 +99,7 @@ export default function Team() {
                     border: `1.7px solid ${Colors.orange} !important`,
                     boxShadow: ` 0 8px 15px 0 ${Colors.orange} `,
                     overflow: `hidden !important`,
-                    
                   }}
-                  
                 >
                   <div
                     className="card profile-card-2"
@@ -111,10 +126,19 @@ export default function Team() {
                         className="profile"
                         style={{ overflow: "visible" }}
                       />
-                      <Typography variant="h5"  className="card-title font-weight-bold" style={{fontSize:'1.35rem'}} >
+                      <Typography
+                        variant="h5"
+                        className="card-title font-weight-bold"
+                        style={{ fontSize: "1.35rem" }}
+                      >
                         {item.name}
                       </Typography>
-                      <Typography variant="caption" style={{color:Colors.SubWhite}}  >{item.title}</Typography>
+                      <Typography
+                        variant="caption"
+                        style={{ color: Colors.SubWhite }}
+                      >
+                        {item.title}
+                      </Typography>
                       {/* <div className="p-2">
                       <h6 className="text-success border-bottom border-info font-weight-bold">
                         Skills
@@ -173,7 +197,6 @@ export default function Team() {
                   </div>
                 </div>
               </div>
-             
             ))}
 
             {/* <div className="col-md-4 col-sm-6 col-xs-12">

@@ -177,7 +177,7 @@ export default function about() {
                         backgroundImage:
                           "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
                         boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
-                        color:Colors.realorange,
+                        color:Colors.SubWhite,
                         overflow: "hidden",
                       }}
                     >
@@ -191,7 +191,7 @@ export default function about() {
                         backgroundImage:
                           "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
                         boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
-                        color:Colors.realorange,
+                        color:Colors.SubWhite,
                         overflow: "hidden",
                       }}
                     >
@@ -205,7 +205,7 @@ export default function about() {
                         backgroundImage:
                           "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
                         boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
-                        color:Colors.realorange,
+                        color:Colors.SubWhite,
                         overflow: "hidden",
                       }}
                     >
@@ -219,7 +219,7 @@ export default function about() {
                         backgroundImage:
                           "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
                         boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
-                        color:Colors.realorange,
+                        color:Colors.SubWhite,
                         overflow: "hidden",
                       }}
                     >

@@ -88,7 +88,7 @@ const AddProduct = () => {
           quantity: "",
           loading: false,
           createdProduct: data.name,
-        });
+        }); 
       }
     });
   };

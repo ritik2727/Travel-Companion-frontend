@@ -5,168 +5,329 @@ import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
 import { listOrders, getStatusValues, updateOrderStatus } from "./apiAdmin";
 import moment from "moment";
+import { ColorLens } from "@mui/icons-material";
+import Colors from "../core/Colors";
 
 const Orders = () => {
-    const [orders, setOrders] = useState([]);
-    const [statusValues, setStatusValues] = useState([]);
+  const [orders, setOrders] = useState([]);
+  const [statusValues, setStatusValues] = useState([]);
 
-    const { user, token } = isAuthenticated();
+  const { user, token } = isAuthenticated();
 
-    const loadOrders = () => {
-        listOrders(user._id, token).then(data => {
-            if (data.error) {
-                console.log(data.error);
-            } else {
-                setOrders(data);
-            }
-        });
-    };
+  const loadOrders = () => {
+    listOrders(user._id, token).then((data) => {
+      if (data.error) {
+        console.log(data.error);
+      } else {
+        setOrders(data);
+      }
+    });
+  };
 
-    const loadStatusValues = () => {
-        getStatusValues(user._id, token).then(data => {
-            if (data.error) {
-                console.log(data.error);
-            } else {
-                setStatusValues(data);
-            }
-        });
-    };
+  const loadStatusValues = () => {
+    getStatusValues(user._id, token).then((data) => {
+      if (data.error) {
+        console.log(data.error);
+      } else {
+        setStatusValues(data);
+      }
+    });
+  };
 
-    useEffect(() => {
-        loadOrders();
-        loadStatusValues();
-         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+  useEffect(() => {
+    loadOrders();
+    loadStatusValues();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    const showOrdersLength = () => {
-        if (orders.length > 0) {
-            return (
-                <h1 className="text-danger display-2 my-2 p-1 border">
-                    Total Place orders: {orders.length}
-                </h1>
-            );
-        } else {
-            return <h1 className="text-danger my-2 p-1 border">No Place orders</h1>;
-        }
-    };
+  const showOrdersLength = () => {
+    if (orders.length > 0) {
+      return (
+        <h1 className="text  my-2 p-1 " style={{color:Colors.orange}}>
+          Total Place orders: {orders.length}
+        </h1>
+      );
+    } else {
+      return <h1 className=" my-2 p-1 border" style={{color:Colors.orange}}>No Place orders</h1>;
+    }
+  };
 
-    const showInput = (key, value) => (
-        <div className="input-group mb-2 mr-sm-2">
-            <div className="input-group-prepend">
-                <div className="input-group-text">{key}</div>
-            </div>
-            <input
-                type="text"
-                value={value}
-                className="form-control"
-                readOnly
-            />
-        </div>
-    );
-
-    const handleStatusChange = (e, orderId) => {
-        updateOrderStatus(user._id, token, orderId, e.target.value).then(
-            data => {
-                if (data.error) {
-                    console.log("Status update failed");
-                } else {
-                    loadOrders();
-                }
-            }
-        );
-    };
-
-    const showStatus = o => (
-        <div className="form-group">
-            <h3 className="mark mb-4">Status: {o.status}</h3>
-            <select
-                className="form-control"
-                onChange={e => handleStatusChange(e, o._id)}
-            >
-                <option>Update Status</option>
-                {statusValues.map((status, index) => (
-                    <option key={index} value={status}>
-                        {status}
-                    </option>
-                ))}
-            </select>
-        </div>
-    );
-
-    return (
-        <Layout
-            title="Orders"
-            description={`G'day ${
-                user.name
-            }, you can manage all the orders here`}
-            className="container-fluid"
+  const showInput = (key, value) => (
+    <div
+      className="input-group mb-2 mr-sm-2"
+      style={{
+        backgroundColor: "rgb(34 43 69)",
+        borderBottom: "#F037A5",
+        backgroundImage:
+          "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
+        boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
+        borderRadius: 15,
+        overflow: "hidden",
+      }}
+    >
+      <div className="input-group-prepend">
+        <div
+          className="input-group-text"
+          style={{
+            backgroundColor: "rgb(34 43 69)",
+            borderBottom: "#F037A5",
+            backgroundImage:
+              "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
+            // boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
+            // borderRadius: 15,
+            color: Colors.SubWhite,
+            overflow: "hidden",
+          }}
         >
-            <div className="row">
-                <div className="col-md-8 offset-md-2">
-                    {showOrdersLength()}
+          {key}
+        </div>
+      </div>
+      <input
+        type="text"
+        value={value}
+        style={{
+          backgroundColor: "rgb(34 43 69)",
+          borderBottom: "#F037A5",
+          backgroundImage:
+            "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
+          //   boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
+          //   borderRadius: 15,
+          color: Colors.SubWhite,
+          overflow: "hidden",
+        }}
+        className="form-control"
+        readOnly
+      />
+    </div>
+  );
 
-                    {orders.map((o, oIndex) => {
-                        return (
-                            <div
-                                className="my-5"
-                                key={oIndex}
-                                style={{ borderBottom: "5px solid indigo" }}
-                            >
-                                <h2 className="mb-5">
-                                    <span className="bg-primary">
-                                        Order ID: {o._id}
-                                    </span>
-                                </h2>
+  const handleStatusChange = (e, orderId) => {
+    updateOrderStatus(user._id, token, orderId, e.target.value).then((data) => {
+      if (data.error) {
+        console.log("Status update failed");
+      } else {
+        loadOrders();
+      }
+    });
+  };
 
-                                <ul className="list-group mb-2">
-                                    <li className="list-group-item">
-                                        {showStatus(o)}
-                                    </li>
-                                    <li className="list-group-item">
-                                        Transaction ID: {o.transaction_id}
-                                    </li>
-                                    <li className="list-group-item">
-                                        Amount: ${o.amount}
-                                    </li>
-                                    <li className="list-group-item">
-                                        Ordered by: {o.user.name}
-                                    </li>
-                                    <li className="list-group-item">
-                                        Ordered on:{" "}
-                                        {moment(o.createdAt).fromNow()}
-                                    </li>
-                                    <li className="list-group-item">
-                                        Delivery address: {o.address}
-                                    </li>
-                                </ul>
+  const showStatus = (o) => (
+    <div
+      className="form-group"
+      style={{
+        backgroundColor: "rgb(34 43 69)",
+        borderBottom: "#F037A5",
+        backgroundImage:
+          "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
+        boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
+        borderRadius: 10,
 
-                                <h3 className="mt-4 mb-4 font-italic">
-                                    Total products in the order:{" "}
-                                    {o.products.length}
-                                </h3>
+        overflow: "hidden",
+      }}
+    >
+      <h3
+        className="mark mb-4"
+        style={{ color: Colors.white, backgroundColor: Colors.orange }}
+      >
+        Status: {o.status}
+      </h3>
+      <select
+        className="form-control"
+        onChange={(e) => handleStatusChange(e, o._id)}
+        style={{
+          backgroundColor: "rgb(34 43 69)",
+          borderBottom: "#F037A5",
+          backgroundImage:
+            "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
+          boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
+          // borderRadius: 15,
+          color: Colors.SubWhite,
+          overflow: "hidden",
+          // paddingBottom:'1em'
+        }}
+      >
+        <option>Update Status</option>
+        {statusValues.map((status, index) => (
+          <option
+            key={index}
+            value={status}
 
-                                {o.products.map((p, pIndex) => (
-                                    <div
-                                        className="mb-4"
-                                        key={pIndex}
-                                        style={{
-                                            padding: "20px",
-                                            border: "1px solid indigo"
-                                        }}
-                                    >
-                                        {showInput("Product name", p.name)}
-                                        {showInput("Product price", p.price)}
-                                        {showInput("Product total", p.count)}
-                                        {showInput("Product Id", p._id)}
-                                    </div>
-                                ))}
-                            </div>
-                        );
-                    })}
-                </div>
-            </div>
-        </Layout>
-    );
+            //   style={{
+            //     backgroundColor: "rgb(34 43 69)",
+            //     borderBottom: "#F037A5",
+            //     backgroundImage:
+            //       "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
+            //     boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
+            //     borderRadius: 15,
+            //     overflow: "hidden",
+            //   }}
+          >
+            {status}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+
+  return (
+    <Layout
+      title="Orders"
+      description={`G'day ${user.name}, you can manage all the orders here`}
+      className="container-fluid"
+    >
+      <div className="row">
+        <div className="col-md-8 offset-md-2">
+          {showOrdersLength()}
+
+          {orders.map((o, oIndex) => {
+            return (
+              <div
+                className="my-5"
+                key={oIndex}
+                // style={{ borderBottom: "5px solid indigo" }}
+                style={{
+                  backgroundColor: "rgb(34 43 69)",
+                  borderBottom: "#F037A5",
+                  backgroundImage:
+                    "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
+                  boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
+                  borderRadius: 15,
+                  overflow: "hidden",
+                }}
+              >
+                <h2 className="mb-5">
+                  <span
+                    style={{
+                      color: Colors.white,
+                      backgroundColor: Colors.orange,
+                    }}
+                  >
+                    Order ID: {o._id}
+                  </span>
+                </h2>
+
+                <ul className="list-group mb-2">
+                  <li
+                    className="list-group-item"
+                    style={{
+                      backgroundColor: "rgb(34 43 69)",
+                      borderBottom: "#F037A5",
+                      backgroundImage:
+                        "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
+                      boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
+                      // borderRadius: 15,
+                      color: Colors.SubWhite,
+                      overflow: "hidden",
+                    }}
+                  >
+                    {showStatus(o)}
+                  </li>
+                  <li
+                    className="list-group-item"
+                    style={{
+                      backgroundColor: "rgb(34 43 69)",
+                      borderBottom: "#F037A5",
+                      backgroundImage:
+                        "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
+                      boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
+                      // borderRadius: 15,
+                      color: Colors.SubWhite,
+                      overflow: "hidden",
+                    }}
+                  >
+                    Transaction ID: {o.transaction_id}
+                  </li>
+                  <li
+                    className="list-group-item"
+                    style={{
+                      backgroundColor: "rgb(34 43 69)",
+                      borderBottom: "#F037A5",
+                      backgroundImage:
+                        "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
+                      boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
+                      // borderRadius: 15,
+                      color: Colors.SubWhite,
+                      overflow: "hidden",
+                    }}
+                  >
+                    Amount: ${o.amount}
+                  </li>
+                  <li
+                    className="list-group-item"
+                    style={{
+                      backgroundColor: "rgb(34 43 69)",
+                      borderBottom: "#F037A5",
+                      backgroundImage:
+                        "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
+                      boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
+                      // borderRadius: 15,
+                      color: Colors.SubWhite,
+                      overflow: "hidden",
+                    }}
+                  >
+                    Ordered by: {o.user.name}
+                  </li>
+                  <li
+                    className="list-group-item"
+                    style={{
+                      backgroundColor: "rgb(34 43 69)",
+                      borderBottom: "#F037A5",
+                      backgroundImage:
+                        "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
+                      boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
+                      // borderRadius: 15,
+                      color: Colors.SubWhite,
+                      overflow: "hidden",
+                    }}
+                  >
+                    Ordered on: {moment(o.createdAt).fromNow()}
+                  </li>
+                  <li
+                    className="list-group-item"
+                    style={{
+                      backgroundColor: "rgb(34 43 69)",
+                      borderBottom: "#F037A5",
+                      backgroundImage:
+                        "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
+                      boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
+                      // borderRadius: 15,
+                      color: Colors.SubWhite,
+                      overflow: "hidden",
+                    }}
+                  >
+                    Delivery address: {o.address}
+                  </li>
+                </ul>
+
+                <h3
+                  className="mt-4 mb-4 font-italic"
+                  style={{ color: Colors.white }}
+                >
+                  Total products in the order: {o.products.length}
+                </h3>
+
+                {o.products.map((p, pIndex) => (
+                  <div
+                    className="mb-4"
+                    key={pIndex}
+                    style={{
+                      padding: "20px",
+                      //   border: "1px solid indigo",
+                    }}
+                  >
+                    {showInput("Product name", p.name)}
+                    {showInput("Product price", p.price)}
+                    {showInput("Product total", p.count)}
+                    {showInput("Product Id", p._id)}
+                  </div>
+                ))}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </Layout>
+  );
 };
 
 export default Orders;
