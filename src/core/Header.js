@@ -856,7 +856,7 @@ function NewHeader(props) {
             )}
             {/* ))} */}
             {/* {userInfo && userInfo.isAdmin && ( */}
-            {isAuthenticated() && (
+          
               <ListItem
                 onClick={() => {
                   handleClickA();
@@ -883,7 +883,7 @@ function NewHeader(props) {
                   <ExpandMore style={{ color: Colors.white }} />
                 )}
               </ListItem>
-            )}
+       
             {/* )} */}
             {/* ))} */}
             <Collapse in={openA} timeout="auto" unmountOnExit>
@@ -942,8 +942,10 @@ function NewHeader(props) {
       </SwipeableDrawer>
       <IconButton
         className={classes.drawerIconContainer}
+        // sx={{ boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}
         onClick={() => setOpenDrawer(!openDrawer)}
         // disableRipple
+        style={{outline: 'none'}}
         disableFocusRipple
         // edge
         // disableFocusRipple

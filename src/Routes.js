@@ -30,6 +30,8 @@ import ScrollTop from "./core/ScrollTop";
 import Colors from "./core/Colors";
 import NewFooter from "./core/NewFooter";
 import ManageCategory from "./admin/ManageCategory";
+import ManageUsers from "./admin/ManageUsers";
+import UpdateUser from "./admin/UpdateUser";
 
 const Routes = (props) => {
   const [value, setValue] = useState(0);
@@ -95,6 +97,11 @@ const Routes = (props) => {
                 exact
                 component={ManageCategory}
               />
+               <PrivateRoute
+                path="/admin/users"
+                exact
+                component={ManageUsers}
+              />
               <AdminRoute
                 path="/admin/product/update/:productId"
                 exact
@@ -104,6 +111,11 @@ const Routes = (props) => {
                 path="/admin/category/update/:categoryId"
                 exact
                 component={UpdateCategory}
+              />
+                <AdminRoute
+                path="/admin/user/update/:customerId"
+                exact
+                component={UpdateUser}
               />
             </Switch>
             </main>

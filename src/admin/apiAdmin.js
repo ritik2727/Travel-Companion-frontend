@@ -72,6 +72,67 @@ export const getCategories = () => {
         .catch(err => console.log(err));
 };
 
+export const getUsers = (userId, token) => {
+    return fetch(`${API}/user/list/${userId}`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
+
+
+export const EditUser = (customerId,userId, token, data) => {
+    return fetch(`${API}/user/${customerId}/${userId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
+export const getUser = (customerId,userId, token) => {
+    return fetch(`${API}/user/${customerId}/${userId}`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
+
+export const deleteUser = (customerId,userId, token) => {
+    return fetch(`${API}/user/${customerId}/${userId}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
+
 export const deleteCategory = (categoryId, userId, token) => {
     return fetch(`${API}/category/${categoryId}/${userId}`, {
         method: 'DELETE',
