@@ -265,7 +265,7 @@ const Orders = () => {
                       overflow: "hidden",
                     }}
                   >
-                    Ordered by: {o.user.name}
+                    Ordered by: { o.user?.name && o.user.name}
                   </li>
                   <li
                     className="list-group-item"
