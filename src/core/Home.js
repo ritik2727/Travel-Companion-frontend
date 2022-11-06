@@ -117,7 +117,7 @@ const Home = () => {
           </Grid>
         </Grid>
 
-        {/* <h2
+      {/* <h2
           className="text-center h2 mt-3 mb-3"
           style={{ color: Colors.white }}
         >
@@ -132,7 +132,7 @@ const Home = () => {
               <Card product={product} />
             </Col>
           ))}
-        </div> */}
+        </div>  */}
         <Grid
           container
           direction="column"

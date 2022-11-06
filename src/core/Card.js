@@ -126,7 +126,7 @@ const Card = ({
   return (
     <div
       // className="border rounded shadow"
-   
+
       style={{
         backgroundColor: "rgb(34 43 69)",
         borderBottom: "#F037A5",
@@ -138,8 +138,8 @@ const Card = ({
         // border: `1.7px solid ${Colors.orange} !important`,
         // boxShadow: `  0px 3px 6px 0px ${Colors.orange} `,
         overflow: `hidden !important`,
-        justifyContent:'center',
-        alignItems:'center',
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       <div
@@ -157,10 +157,10 @@ const Card = ({
         <div className="view overlay">
           {shouldRedirect(redirect)}
           {/* <a href={product.youtubelink} data-toggle="lightbox" data-gallery="youtubevideos"> */}
-          <ShowImage item={product} url="product"  className="img-thumbnail" />
+          <ShowImage item={product} url="product" className="img-thumbnail" />
           <h5
             className="ml-2 text-success h5 font-weight-bold pb-2"
-            style={{ color: Colors.orange }}
+            style={{ color: Colors.orange,width:300}}
           >
             {product.name}
           </h5>
@@ -173,6 +173,7 @@ const Card = ({
                 fontWeight: "600",
                 fontSize: "0.8em",
                 color: Colors.white,
+                width:200
               }}
             >
               {product.subname}
@@ -194,14 +195,16 @@ const Card = ({
           </div>
         </div>
       </div>
+
       <div
         className="text-justify m-2 p-2"
         style={{ fontSize: "14px", fontWeight: "500" }}
       >
-        <p classname="text-justify" style={{ color: Colors.SubWhite }}>
-          {product.description && product.description.substring(0, 400)}
-        </p>
-          
+        <div style={{width:300}}>
+          <p classname="text-justify" style={{ color: Colors.SubWhite }}>
+            {product.description && product.description.substring(0, 400)}
+          </p>
+        </div>
         {showViewButton(showViewProductButton)}
         {showAddToCartBtn(showAddToCartButton)}
         {showRemoveButton(showRemoveProductButton)}
@@ -213,7 +216,7 @@ const Card = ({
             className="text-info mx-1"
             style={{ fontWeight: "600", fontSize: "0.7em" }}
           >
-            <span >Category: </span>
+            <span>Category: </span>
             {product.category && product.category.name}
           </p>
         </div>
