@@ -74,7 +74,7 @@ const Signup = () => {
             </div>
         </div>
             <div className="col-xs-12 col-sm-6 col-md-5 rounded-right my-3 shadow-lg" id="signup-intro">
-                <h2 className="text-white text-center my-3 p-2 h2">Welcome to TravelYaari</h2>
+                <h2 className="text-white text-center my-3 p-2 h2">Welcome to Lukjury Travel</h2>
                 <p className="text-center text-warning py-2">We Are Happy to see you here. We are working to provide the best services to you.</p>
                 <img className="img-fluid rounded" src={towerimage} alt="signup" />
                 <div>

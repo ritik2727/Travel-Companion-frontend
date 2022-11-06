@@ -119,17 +119,17 @@ export default function about() {
                     <br />
                     <a href="#" className="font-weight-bold text-info">
                       <i class="fa fa-clock-o" aria-hidden="true"></i> ---
-                      December 2022---
+                      November 2022---
                     </a>
                     <br />
-                    In the december 2022, Lukjury Travel website get Deployed to
+                    In the November 2022, Lukjury Travel website get Deployed to
                     various platform including github pages and heroku <br />
                     <a href="#" className="font-weight-bold text-success">
                       <i class="fa fa-clock-o" aria-hidden="true"></i> --- April
                       2022---
                     </a>
                     <br />
-                    In the April 2022, Lukjury Travel website get itself
+                    In the September 2022, Lukjury Travel website get itself
                     developed by MERN Stack & Deployed to various platform.
                   </p>
                 </div>

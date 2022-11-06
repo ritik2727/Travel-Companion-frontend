@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import {
   getProducts,
   deleteProduct,
@@ -9,10 +10,11 @@ import {
   deleteCategory,
 } from "./apiAdmin";
 import Colors from "../core/Colors";
+import { Typography } from "@mui/material";
 
 const ManageCategory = () => {
   const [products, setProducts] = useState([]);
-
+  let history = useHistory();
   const { user, token } = isAuthenticated();
 
   const loadProducts = () => {
@@ -45,7 +47,11 @@ const ManageCategory = () => {
       description="Perform CRUD on products"
       className="container-fluid"
     >
-      <div className="row">
+         
+        
+         
+      <div className="row"  >
+        
         <div className="col-12 my-3">
           <h2 className="text-center" style={{ color: Colors.orange }}>
             Total {products.length} Category
@@ -77,8 +83,18 @@ const ManageCategory = () => {
                   overflow: "hidden",
                 }}
               >
-                <strong style={{ color: Colors.white }}>{p.name}</strong>
-                <Link to={`/admin/category/update/${p._id}`}>
+          
+                 <strong style={{ color: Colors.white }}>
+                 {p.name.length > 22
+                      ? `${p.name.substring(0, 22)}...`
+                      : p.name}
+                  {/* {p.name} */}
+                  </strong>
+                
+                <div className="row">
+                
+                <div style={{marginRight:'1rem'}}>
+                {/* <Link to={`/admin/category/update/${p._id}`}>
                   <span
                     className="badge  badge-pill"
                     style={{
@@ -88,7 +104,22 @@ const ManageCategory = () => {
                   >
                     Update
                   </span>
-                </Link>
+                </Link> */}
+
+                <button
+                  className="badge  badge-pill"
+                  onClick={() => history.push(`/admin/category/update/${p._id}`)}
+                  style={{
+                    backgroundColor: Colors.realorange,
+                    color: Colors.white,
+                  }}
+                >
+              
+                Update
+               
+                </button>
+                </div>
+                <div>
                 <button
                   className="badge  badge-pill"
                   onClick={() => destroy(p._id)}
@@ -105,6 +136,8 @@ const ManageCategory = () => {
                   Delete
                   {/* </span> */}
                 </button>
+                </div>
+                </div>
               </li>
             ))}
           </ul>

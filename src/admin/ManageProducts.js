@@ -4,16 +4,17 @@ import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
 import { getProducts, deleteProduct } from "./apiAdmin";
 import Colors from "../core/Colors";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const ManageProducts = () => {
   const [products, setProducts] = useState([]);
-
+  let history = useHistory();
   const { user, token } = isAuthenticated();
 
   const loadProducts = () => {
     getProducts().then((data) => {
       if (data.error) {
-        console.log(data.error); 
+        console.log(data.error);
       } else {
         setProducts(data);
       }
@@ -41,8 +42,10 @@ const ManageProducts = () => {
       className="container-fluid"
     >
       <div className="row">
-        <div className="col-12 my-3" >
-          <h2 className="text-center" style={{color:Colors.orange}}>Total {products.length} Places</h2>
+        <div className="col-12 my-3">
+          <h2 className="text-center" style={{ color: Colors.orange }}>
+            Total {products.length} Places
+          </h2>
           <hr />
           <ul
             className="list-group"
@@ -70,8 +73,48 @@ const ManageProducts = () => {
                   overflow: "hidden",
                 }}
               >
-                <strong style={{ color: Colors.white }}>{p.name}</strong>
-                <Link to={`/admin/product/update/${p._id}`}>
+                <strong style={{ color: Colors.white }}>
+                  {" "}
+                  {p.name.length > 22
+                    ? `${p.name.substring(0, 22)}...`
+                    : p.name}
+                </strong>
+
+                <div className="row">
+                  <div style={{ marginRight: "1rem" }}>
+                    <button
+                      className="badge  badge-pill"
+                      onClick={() =>
+                        history.push(`/admin/product/update/${p._id}`)
+                      }
+                      style={{
+                        backgroundColor: Colors.realorange,
+                        color: Colors.white,
+                      }}
+                    >
+                      Update
+                    </button>
+                  </div>
+                  <div>
+                    <button
+                      className="badge  badge-pill"
+                      onClick={() => destroy(p._id)}
+                      style={{
+                        backgroundColor: Colors.danger,
+                        color: Colors.white,
+                      }}
+                    >
+                      {/* <span
+                  onClick={() => destroy(p._id)}
+                  className="badge  badge-pill"
+                  style={{backgroundColor:Colors.danger,color:Colors.white}}
+                > */}
+                      Delete
+                      {/* </span> */}
+                    </button>
+                  </div>
+                </div>
+                {/* <Link to={`/admin/product/update/${p._id}`}>
                   <span
                     className="badge  badge-pill"
                     style={{
@@ -85,10 +128,13 @@ const ManageProducts = () => {
                 <span
                   onClick={() => destroy(p._id)}
                   className="badge  badge-pill"
-                  style={{backgroundColor:Colors.danger,color:Colors.white}}
+                  style={{
+                    backgroundColor: Colors.danger,
+                    color: Colors.white,
+                  }}
                 >
                   Delete
-                </span>
+                </span> */}
               </li>
             ))}
           </ul>

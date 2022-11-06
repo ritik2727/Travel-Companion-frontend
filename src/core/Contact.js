@@ -33,7 +33,7 @@ export default function Contact() {
                   aria-hidden="true"
                 ></i>
                 <p className="text-justify m-3 text-white">
-                  Founded in 2020, TravelYaari is India’s leading online travel
+                  Founded in 2022, Lukjury Travel is India’s leading online travel
                   marketplace bringing both the traveler and expert
                   Travel-Agents on a common platform.
                 </p>
