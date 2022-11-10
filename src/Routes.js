@@ -32,6 +32,8 @@ import NewFooter from "./core/NewFooter";
 import ManageCategory from "./admin/ManageCategory";
 import ManageUsers from "./admin/ManageUsers";
 import UpdateUser from "./admin/UpdateUser";
+import OTPScreen from "./core/OTPScreen";
+import CouponScreen from "./admin/CouponScreen";
 
 const Routes = (props) => {
   const [value, setValue] = useState(0);
@@ -63,6 +65,7 @@ const Routes = (props) => {
               <Route path="/shop" exact component={Shop} />
               <Route path="/signin" exact component={Signin} />
               <Route path="/signup" exact component={Signup} />
+                <Route path="/reset-password" exact component={OTPScreen} />
               <Route path="/gallery" exact component={Gallerylook} />
               <Route path="/team" exact component={Team} />
               <Route path="/about" exact component={About} />
@@ -101,6 +104,11 @@ const Routes = (props) => {
                 path="/admin/users"
                 exact
                 component={ManageUsers}
+              />
+                 <PrivateRoute
+               path='/admin/coupon'
+                exact
+                component={CouponScreen}
               />
               <AdminRoute
                 path="/admin/product/update/:productId"

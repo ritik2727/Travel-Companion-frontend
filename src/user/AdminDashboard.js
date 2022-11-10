@@ -128,6 +128,22 @@ const AdminDashboard = () => {
               Manage Users
             </Link>
           </li>
+          <li
+            className="list-group-item"
+            style={{
+              backgroundColor: "rgb(34 43 69)",
+              borderBottom: "#F037A5",
+              backgroundImage:
+                "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
+              boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
+              color: Colors.white,
+              overflow: "hidden",
+            }}
+          >
+            <Link className="nav-link" to="/admin/coupon" style={{  color: Colors.white,}}>
+              Manage Coupons
+            </Link>
+          </li>
         </ul>
       </div>
     );

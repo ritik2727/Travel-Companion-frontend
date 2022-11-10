@@ -8,7 +8,11 @@ import avatar from "./../image/login/avatar.png";
 import sideimage from "./../image/login/side.jpg";
 import "./../CSS/signin.css";
 import Colors from '../core/Colors'
+import { Col, Row } from "react-bootstrap";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 const Signin = () => {
+  const location = useLocation();
+  const redirect = location.search ? location.search.split("=")[1] : "/";
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -79,16 +83,37 @@ const Signin = () => {
               Submit
             </button>
           </form>
-          <div className="text-center">
+          <Row className="py-3">
+        <Col>
+          <Link
+            style={{ color: Colors.white }}
+            to={
+              redirect
+                ? `/reset-password?redirect=${redirect}`
+                : "/reset-password"
+            }
+          >
+            Forgot password ?
+          </Link>
+        </Col>
+        <Col style={{color:Colors.white}}>
+          New Customer?{" "}
+          <Link style={{color:Colors.white}} to={redirect ? `/signup?redirect=${redirect}` : "/signup"}>
+            Register
+          </Link>
+        </Col>
+      </Row>
+          {/* <div className="text-center">
             <span className="text-center d-block text-danger font-weight-bold text-italic">
               or
             </span>
             <Link to="/signup" className="text-white">
               Create an account{" "}
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
+     
       <div
         className="col-sm-8 col-xs-10 col-md-4 rounded-right py-4 px-3"
         id="login-intro"
