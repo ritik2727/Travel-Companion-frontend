@@ -142,6 +142,7 @@ const CardInfo = ({
         overflow: `hidden !important`,
         justifyContent:'center',
         alignItems:'center',
+        marginBottom:'1em'
       }}
     >
       <div

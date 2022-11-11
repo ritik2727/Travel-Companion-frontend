@@ -226,7 +226,7 @@ const Dashboard = () => {
                     return (
                       <div key={i}>
                         <h6 style={{color:Colors.SubWhite}}>Product name: {p.name}</h6>
-                        <h6 style={{color:Colors.SubWhite}}>Product price: ${p.price}</h6>
+                        <h6 style={{color:Colors.SubWhite}}>Product price: ₹{p.price}</h6>
                         <h6 style={{color:Colors.SubWhite}}>Purchased date: {moment(p.createdAt).fromNow()}</h6>
                       </div>
                     );

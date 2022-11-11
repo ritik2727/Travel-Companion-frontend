@@ -89,7 +89,7 @@ const Cart = () => {
         className={matchesMD ? "col " : "row mt-2 "}
       >
         <div className={matchesMD ? "col-10" : "col-4 offset-1"}>
-          <div className="cart-product-details ">
+          <div className="cart-product-details " >
             {items.length > 0 ? showItems(items) : noItemsMessage()}
           </div>
         </div>

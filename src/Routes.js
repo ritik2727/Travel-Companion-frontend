@@ -34,11 +34,13 @@ import ManageUsers from "./admin/ManageUsers";
 import UpdateUser from "./admin/UpdateUser";
 import OTPScreen from "./core/OTPScreen";
 import CouponScreen from "./admin/CouponScreen";
+import { StateProvider } from "../src/context/StateContext";
 
 const Routes = (props) => {
   const [value, setValue] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(0);
   return (
+    <StateProvider>
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={Theme}>
         <BrowserRouter>
@@ -133,6 +135,7 @@ const Routes = (props) => {
         </BrowserRouter>
       </ThemeProvider>
     </StyledEngineProvider>
+    </StateProvider>
   );
 };
 

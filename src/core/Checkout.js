@@ -8,8 +8,17 @@ import { Link } from 'react-router-dom';
 // import "braintree-web"; // not using this package
 import DropIn from 'braintree-web-drop-in-react';
 import Colors from './Colors';
+import ApplyCoupon from './ApplyCoupon';
+import { Button, Col, Row, ListGroup } from 'react-bootstrap';
+import { useContext } from 'react';
+import { StateContext } from '../context/StateContext';
 
 const Checkout = ({ products, setRun = f => f, run = undefined }) => {
+
+    const { ds,t } = useContext(StateContext);
+    const [dis,setdis] = ds;
+    const [couponAppield,setCouponAppield] =t;
+
     const [data, setData] = useState({
         loading: false,
         success: false,
@@ -44,9 +53,12 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
     };
 
     const getTotal = () => {
-        return products.reduce((currentValue, nextValue) => {
+     const amt = products.reduce((currentValue, nextValue) => {
             return currentValue + nextValue.count * nextValue.price;
         }, 0);
+        const disamt = ( amt-(amt*dis)/100);
+
+        return couponAppield ? disamt : amt
     };
 
     const showCheckout = () => {
@@ -100,6 +112,8 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
                                 emptyCart(() => {
                                     setRun(!run); // run useEffect in parent Cart
                                     console.log('payment success and empty cart');
+                                    setCouponAppield(false);
+                                    setdis(0);
                                     setData({
                                         loading: false,
                                         success: true
@@ -170,7 +184,47 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
 
     return (
         <div>
-            <h4 className="p-2 my-2 text-info font-weight-bold">Total: ${getTotal()}</h4>
+            <h4 className="p-2 my-2 text-info font-weight-bold">Total: ₹{getTotal()}</h4>
+            {couponAppield && (
+                <ListGroup.Item style={{ backgroundColor: "#273c75" }}>
+                  <Row className="d-flex align-items-center">
+                    <Col md={8}>
+                      <span style={{ color: "#fff" }}>
+                        Discount Applied: Total Payable: ₹{getTotal()}
+                      </span>
+                    </Col>
+                    <Col md={4}>
+                      <Button
+                        variant="danger"
+                        size="sm"
+                        onClick={()=>{
+                            setCouponAppield(false);
+                            setdis(0);
+                        }}
+                        // onClick={cancelCouponHandler}
+                        // disabled={loadingCancelCoupon}
+                      >
+                        Cancel Coupon
+                     
+                      </Button>
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+              )}
+              <Col
+                style={{
+                  backgroundColor: "rgb(34 43 69)",
+                //   borderColor: Colors.SubWhite,
+                  backgroundImage:
+                    "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
+                  boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
+                  color: Colors.white,
+                }}
+              >
+                <ApplyCoupon
+        
+                />
+              </Col>
             {showLoading(data.loading)}
             {showSuccess(data.success)}
             {showError(data.error)}

@@ -250,7 +250,7 @@ const Orders = () => {
                       overflow: "hidden",
                     }}
                   >
-                    Amount: ${o.amount}
+                    Amount: ₹{o.amount}
                   </li>
                   <li
                     className="list-group-item"
