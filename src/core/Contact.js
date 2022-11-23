@@ -3,7 +3,52 @@ import Layout from "./Layout";
 import deskimg from "./../image/desk.jpg";
 import Colors from "./Colors";
 import { color } from "@mui/system";
+import { contactApi } from "./apiCore";
+import { useState } from "react";
 export default function Contact() {
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+    // formData: "",
+  });
+
+  const { name, email, phone, message } = values;
+
+  const handleChange = (name) => (event) => {
+    const value = name === "photo" ? event.target.files[0] : event.target.value;
+    // formData.set(name, value);
+    setValues({ ...values, [name]: value });
+  };
+  const clickSubmit =  (e) => {
+    let details = {
+      name: name,
+      email: email,
+      phone: phone,
+      message: message,
+    };
+    console.log("values",values);
+    console.log(details);
+    e.preventDefault();
+    setValues({ ...values });
+
+    contactApi(values).then((data) => {
+      if (data.error) {
+        console.log(data.error)
+        // setValues({ ...values, error: data.error });
+      } else {
+        setValues({
+          ...values,
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+      }
+    });
+  };
+
   return (
     <Layout>
       <div className="container" id="banner1">
@@ -33,8 +78,8 @@ export default function Contact() {
                   aria-hidden="true"
                 ></i>
                 <p className="text-justify m-3 text-white">
-                  Founded in 2022, Lukjury Travel is India’s leading online travel
-                  marketplace bringing both the traveler and expert
+                  Founded in 2022, Lukjury Travel is India’s leading online
+                  travel marketplace bringing both the traveler and expert
                   Travel-Agents on a common platform.
                 </p>
               </div>
@@ -69,7 +114,7 @@ export default function Contact() {
                       backgroundImage:
                         "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
                       boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
-                        color:Colors.SubWhite,
+                      color: Colors.SubWhite,
                       overflow: "hidden",
                     }}
                   >
@@ -83,7 +128,7 @@ export default function Contact() {
                       backgroundImage:
                         "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
                       boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
-                      color:Colors.SubWhite,
+                      color: Colors.SubWhite,
                       overflow: "hidden",
                     }}
                   >
@@ -97,7 +142,7 @@ export default function Contact() {
                       backgroundImage:
                         "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
                       boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
-                      color:Colors.SubWhite,
+                      color: Colors.SubWhite,
                       overflow: "hidden",
                     }}
                   >
@@ -108,7 +153,9 @@ export default function Contact() {
             </div>
           </div>
           <div className="col-xs-12 col-sm-6">
-            <div className="card my-4 px-3"  style={{
+            <div
+              className="card my-4 px-3"
+              style={{
                 backgroundColor: "rgb(34 43 69)",
                 borderBottom: "#F037A5",
                 backgroundImage:
@@ -116,50 +163,70 @@ export default function Contact() {
                 boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
                 borderRadius: 15,
                 overflow: "hidden",
-              }}>
-              <h3 className="p-2 text-center my-2 " style={{color:Colors.orange}}>
+              }}
+            >
+              <h3
+                className="p-2 text-center my-2 "
+                style={{ color: Colors.orange }}
+              >
                 Please Fill Out this Form
               </h3>
-              <form method="POST" action="">
+              <form  onSubmit={clickSubmit}>
                 <div className="form-group">
-                  <label for="name" style={{color:Colors.white}}>Name</label>
+                  <label for="name" style={{ color: Colors.white }}>
+                    Name
+                  </label>
                   <input
                     type="text"
                     className="form-control"
-                    name="name"
+                    // name="name"
+                    onChange={handleChange("name")}
+                    value={name}
                     placeholder="Name"
-                    required="true"
+                    // required="true"
                     pattern=".{1,}"
                   />
                 </div>
                 <div className="form-group">
-                  <label for="email" style={{color:Colors.white}}>Email</label>
+                  <label for="email" style={{ color: Colors.white }}>
+                    Email
+                  </label>
                   <input
                     type="email"
+                    onChange={handleChange("email")}
+                    value={email}
                     className="form-control"
-                    name="email"
+                    // name="email"
                     placeholder="Email"
-                    required="true"
+                    // required="true"
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
                   />
                 </div>
                 <div className="form-group">
-                  <label for="contact" style={{color:Colors.white}}>Contact No.</label>
+                  <label for="contact" style={{ color: Colors.white }}>
+                    Contact No.
+                  </label>
                   <input
                     type="text"
+                    onChange={handleChange("phone")}
+                    value={phone}
                     className="form-control"
-                    name="contact"
+                    // name="contact"
                     placeholder="Contact"
-                    required="true"
+                    // required="true"
                     pattern=".{10}"
                   />
                 </div>
                 <div className="form-group">
-                  <label for="message" style={{color:Colors.white}}>Message</label>
+                  <label for="message" style={{ color: Colors.white }}>
+                    Message
+                  </label>
                   <input
                     type="text"
+                    onChange={handleChange("message")}
+                    value={message}
                     className="form-control"
-                    name="message"
+                    // name="message"
                     placeholder="message"
                   />
                 </div>
@@ -167,6 +234,7 @@ export default function Contact() {
                   <button
                     className="btn btn-primary"
                     type="submit"
+                    // onSubmit={()=>console.log("wefffff")}
                     value="Submit"
                     name="button"
                   >
@@ -178,18 +246,21 @@ export default function Contact() {
           </div>
         </div>
       </div>
-      <div className="container card p-3"   style={{
-                backgroundColor: "rgb(34 43 69)",
-                borderBottom: "#F037A5",
-                backgroundImage:
-                  "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
-                boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
-                borderRadius: 15,
-                overflow: "hidden",
-              }}>
-        <div className="row"   >
-          <div className="col-md-6"  >
-            <h2 style={{color:Colors.orange}}>
+      <div
+        className="container card p-3"
+        style={{
+          backgroundColor: "rgb(34 43 69)",
+          borderBottom: "#F037A5",
+          backgroundImage:
+            "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
+          boxShadow: "rgb(0 0 0 / 25%) 0px 3px 6px 0px",
+          borderRadius: 15,
+          overflow: "hidden",
+        }}
+      >
+        <div className="row">
+          <div className="col-md-6">
+            <h2 style={{ color: Colors.orange }}>
               <b>
                 <u>LIVE SUPPORT</u>
               </b>
@@ -198,7 +269,7 @@ export default function Contact() {
               24 hours || 7 days a week || 365 days in a year Live Technical
               Support
             </h4>
-            <p className="text-justify p-2" style={{color:Colors.SubWhite}}>
+            <p className="text-justify p-2" style={{ color: Colors.SubWhite }}>
               It is a long established fact that a reader will be distracted by
               the readable content of a page when looking at its layout. The
               point of using Lorem Ipsum is that it has a more-or-less normal

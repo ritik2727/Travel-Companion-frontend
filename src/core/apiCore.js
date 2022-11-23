@@ -1,4 +1,4 @@
-import { API } from "../config";
+import { API,API2 } from "../config";
 import queryString from "query-string";
 
 export const getProducts = sortBy => {
@@ -134,6 +134,30 @@ export const couponApply = (coupon) => {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(data)
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
+
+export const contactApi = (form) => {
+    const data = {
+      form
+    };
+    let details = {
+        name: "ed",
+        email: "eddd@gmail.com",
+        phone: 33333333,
+        message: "EDdddd",
+      };
+    return fetch(`${API2}/contact`, {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(details)
     })
         .then(response => {
             return response.json();

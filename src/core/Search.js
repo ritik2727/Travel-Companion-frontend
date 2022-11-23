@@ -3,9 +3,32 @@ import { getCategories, list } from "./apiCore";
 import Card from "./Card";
 import "./../CSS/search.css";
 import Colors from "./Colors";
-import { Typography } from "@mui/material";
+
+import { Typography, Grid, Button } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles((theme) => ({
+  rowContainer: {
+    paddingLeft: "2em",
+    paddingRight: "2em",
+    paddingTop: "1em",
+    paddingBottom: "10em",
+    [theme.breakpoints.down("sm")]: {
+      paddingLeft: "1em",
+      paddingRight: "1em",
+      paddingTop: "1em",
+    },
+    [theme.breakpoints.down("xs")]: {
+      paddingLeft: "0.5em",
+      paddingRight: "0.5em",
+      paddingTop: "0.5em",
+    },
+  },
+}));
+
 
 const Search = () => {
+  const classes = useStyles();
   const [data, setData] = useState({
     categories: [],
     category: "",
@@ -75,14 +98,38 @@ const Search = () => {
           {searchMessage(searched, results)}
         </h2>
 
-        <div className="row">
+        <Grid
+          container
+          id="home-popularplace"
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+          className={classes.rowContainer}
+        >
+        
+          <Grid
+            item
+            container
+            direction="row"
+            alignItems="center"
+            justifyContent="center"
+            spacing={4}
+          >
+              {results.map((product, i) => (
+              <Grid item key={i}>
+                <Card product={product} />
+              </Grid>
+            ))}
+          </Grid>
+        </Grid>
+        {/* <div className="row">
           {results.map((product, i) => (
             <div className="col-md-3 col-sm-6 col-xs-8 offset-xs-2 mb-3">
               <Card key={i} product={product} />
-            </div>
+             </div>
           ))}
-        </div>
-      </div>
+        </div> */}
+      </div> 
     );
   };
 
